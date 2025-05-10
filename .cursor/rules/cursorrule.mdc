@@ -1,0 +1,77 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+---
+description: Establish consistent structure, patterns, and development standards for the Habit Tracker app built on Boring Template Expo using React Native, Supabase, Zustand, and NativeBase.
+globs: [app/**/*.{ts,tsx}, libs/**/*.{ts,tsx}]
+alwaysApply: true
+---
+
+# 1. Overall Project Structure and Organization
+- Follow the Boring Template convention: keep business logic under `/libs`, pages/screens under `/app`, and components reusable across routes.
+- Organize state logic in `/libs/store`, Supabase queries in `/libs/supabase`, and types in `/libs/types`.
+- Maintain atomic folder organization: each screen or feature can have its own folder with local components and styles.
+- Avoid nesting more than 3 levels deep unless strictly required.
+
+# 2. Component and Hook Development
+- Always use functional components with `React.FC` and typed props/interfaces.
+- Create custom hooks in `/libs/hooks` and prefix them with `use`, following React Hook rules.
+- All custom hooks must return clearly named values (e.g. `{ habits, fetchHabits }`).
+
+# 3. Integration with Supabase
+- Supabase services must be isolated under `/libs/supabase` and follow naming: `getX`, `createX`, `updateX`, `deleteX`.
+- All Supabase calls must use async/await and explicit error handling with typed responses.
+- Shared types between frontend and Supabase tables must be declared in `/libs/types/db.ts`.
+
+# 4. State Management with Zustand
+- Create one store per domain feature (e.g., `habitStore`, `settingsStore`) under `/libs/store`.
+- Store must expose state and methods clearly. Structure: `state`, `actions`, and optional `async`.
+- Avoid directly modifying global state in components. Use store methods instead.
+
+# 5. UI and User Experience with NativeBase
+- Use only NativeBase components unless a very specific use case requires customization.
+- Respect spacing, padding, and text sizes from the NativeBase theme.
+- Maintain mobile-first layouts. All screens must look good on Android and iOS.
+- Use variants and tokens where possible to simplify style consistency.
+
+# 6. Forms with Formik
+- Use Formik with Yup validation for all forms under `/app`.
+- Validation schema should be colocated in the same file or folder as the form component.
+- Prefer `FormControl`, `Input`, `Select`, `Checkbox`, and `Button` from NativeBase in forms.
+
+# 7. Navigation Handling with Expo Router
+- Use nested folders for route groups: (auth), (public), (private).
+- Keep route screens flat when possible: `habit/[id].tsx` rather than `habit/detail.tsx`.
+- Navigation events must use `router.push`, `router.replace`, and `useLocalSearchParams()`.
+
+# 8. Coding and Naming Standards
+- Use kebab-case for files and folders, camelCase for variables, PascalCase for components.
+- Types and interfaces must use `I` or explicit suffix (e.g., `HabitLog`, `UserSettings`).
+- All API interaction files must include a brief comment at the top describing the module.
+- Avoid abbreviations or unclear naming. Prefer `logHabit()` over `lh()`.
+
+---
+description: Ensure consistency between database models and frontend types
+globs: [libs/types/db.ts, libs/supabase/*.ts]
+alwaysApply: true
+---
+
+- Every Supabase table must have a matching TypeScript type in `libs/types/db.ts`.
+- After modifying a table schema, immediately update corresponding types.
+- Types must match database structure exactly in naming and optionality.
+
+---
+description: Validate habit tracking logic and UI structure
+globs: [app/habits/**/*.{ts,tsx}]
+alwaysApply: true
+---
+
+- Streak logic must be handled in Supabase (Edge Functions or triggers) or clearly separated from UI.
+- Ensure all logging interfaces handle both qualitative (`status`) and quantitative (`quantity`) input.
+- Use `FlatList` or `ScrollView` with proper keys for habit lists. Never hardcode index-based keys.
+- Completion logs must reflect correct date handling with `dayjs` and user’s timezone from settings.
+
+---
