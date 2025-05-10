@@ -20,7 +20,7 @@ export default function AuthLoadingScreen() {
 
   if (isAuthenticated) {
     // Si está autenticado, redirigir a la pantalla privada
-    return <Redirect href={'/(private)/home' as any} />;
+    return <Redirect href={'/(private)/index' as any} />;
   }
 
   // Si no está autenticado, redirigir al onboarding

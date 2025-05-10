@@ -6,7 +6,7 @@ export default function PublicLayout() {
 
   // Si está autenticado, redirigir a la ruta privada
   if (isAuthenticated) {
-    return <Redirect href={'/(private)/home' as any} />;
+    return <Redirect href={'/(private)/index' as any} />;
   }
 
   return (
