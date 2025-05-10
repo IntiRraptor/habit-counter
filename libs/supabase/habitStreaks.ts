@@ -2,8 +2,8 @@
  * Módulo para interactuar con la tabla habit_streaks de Supabase
  * Proporciona funciones para gestionar rachas de hábitos
  */
+import { supabase } from '../../app/services/supabaseClient';
 import { HabitStreak } from '../../app/types/db';
-import supabase from './client';
 
 export const getHabitStreak = async (habitId: string): Promise<HabitStreak | null> => {
   try {

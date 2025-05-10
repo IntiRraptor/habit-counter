@@ -2,8 +2,8 @@
  * Módulo para interactuar con la tabla user_settings de Supabase
  * Proporciona funciones para gestionar la configuración de usuario
  */
+import { supabase } from '../../app/services/supabaseClient';
 import { UserSettings } from '../../app/types/db';
-import supabase from './client';
 
 export const getUserSettings = async (userId: string): Promise<UserSettings | null> => {
   try {

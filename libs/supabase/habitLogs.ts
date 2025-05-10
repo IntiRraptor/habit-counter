@@ -2,8 +2,8 @@
  * Módulo para interactuar con la tabla habit_logs de Supabase
  * Proporciona funciones para registrar y consultar los registros de hábitos
  */
+import { supabase } from '../../app/services/supabaseClient';
 import { HabitLog, Status } from '../../app/types/db';
-import supabase from './client';
 
 export const getHabitLogs = async (habitId: string, startDate?: string, endDate?: string): Promise<HabitLog[]> => {
   try {

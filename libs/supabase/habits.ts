@@ -2,8 +2,8 @@
  * Módulo para interactuar con la tabla habits de Supabase
  * Proporciona funciones CRUD para gestionar hábitos
  */
+import { supabase } from '../../app/services/supabaseClient';
 import { Habit } from '../../app/types/db';
-import supabase from './client';
 
 export const getHabits = async (userId: string, includeArchived = false): Promise<Habit[]> => {
   try {

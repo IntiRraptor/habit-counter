@@ -2,8 +2,8 @@
  * Módulo para interactuar con la tabla achievements de Supabase
  * Proporciona funciones para gestionar los logros del usuario
  */
+import { supabase } from '../../app/services/supabaseClient';
 import { Achievement } from '../../app/types/db';
-import supabase from './client';
 
 export const getAchievements = async (userId: string): Promise<Achievement[]> => {
   try {
